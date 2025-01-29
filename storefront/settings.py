@@ -33,6 +33,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'django.contrib.admin',
+    'django.contrib.sessions',
+
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.messages',
@@ -92,6 +94,7 @@ DATABASES = {
         'NAME': 'storefront',
         'HOST':'localhost',
         'USER':'root',
+        'PORT': '3305',  # Specify the correct port
         'PASSWORD':'admin'
     }
 }

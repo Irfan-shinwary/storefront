@@ -11,6 +11,12 @@ class Collection(models.Model):
     title = models.CharField(max_length=255)
     featured_product  = models.ForeignKey('Product', on_delete= models.SET_NULL, null=True, related_name='+')
 
+    def __str__(self):
+        return self.title
+    
+    class Meta:
+        ordering=['title']
+
 
 
 class Product(models.Model):
@@ -22,6 +28,13 @@ class Product(models.Model):
     last_update = models.DateField (auto_now=True)
     collection  = models.ForeignKey(Collection, on_delete= models.PROTECT)
     promotions = models.ManyToManyField (Promotion)
+
+
+    def __str__(self):
+        return self.title
+    
+    class Meta:
+        ordering=['title','-price']
 
 
 
@@ -42,11 +55,17 @@ class Customer(models.Model):
     phone = models.CharField(max_length=255)
     birth_date = models.DateField (null=True)
     membership = models.CharField (max_length=1, choices=MEMBERSHIP_CHOICES, default=MEMBERSHIP_BRONZE)
-    # class Meta:
-    #     db_table='store_customers'
-    #     indexes = [
-    #         models.Index(fields=['last_name','first_name'])
-    #     ]
+    
+    def __str__(self):
+            return f'{self.first_name} {' '}{self.last_name}'
+    
+    class Meta:
+        ordering=['first_name','last_name']
+        # db_table='store_customers'
+        # indexes = [
+        #     models.Index(fields=['last_name','first_name'])
+        # ]
+       
 
 
 
@@ -78,20 +97,12 @@ class OrderItem(models.Model):
 class Adress(models.Model):
     street = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
-    zip = models.SmallIntegerField()
-
+    zip = models.PositiveSmallIntegerField( default=0)
     customer = models.ForeignKey(Customer, on_delete= models.CASCADE)
   
 
 
 
-
-
-class Adress(models.Model):
-    street = models.CharField(max_length=255)
-    city = models.CharField(max_length=255)
-
-    customer = models.ForeignKey(Customer, on_delete= models.CASCADE)
 
 
 class Cart(models.Model):
