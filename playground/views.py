@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.db.models import Q,F
+from django.db.models import Q,F,Count
 from store.models import Customer
 from store.models import Product
 # Create your views here.
@@ -34,7 +34,7 @@ def say_hello(request):
     product = Product.objects.earliest('price')
     product = Product.objects.latest('price')
 
-    query_set = Product.objects.all()[0:]
+    query_set = Product.objects.all()
 
 
 
