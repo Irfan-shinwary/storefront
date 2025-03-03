@@ -34,18 +34,19 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.sessions',
-
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_filters',
     'rest_framework',
+    'debug_toolbar',
     'playground',
     'store',
-    'store_custom',
     'tags',
-    'debug_toolbar',
-    'likes'
+    'likes',
+    'core',
+
     
 ]
 
@@ -96,7 +97,7 @@ DATABASES = {
         'NAME': 'storefront2',
         'HOST':'localhost',
         'USER':'root',
-        'PORT': '3305',  # Specify the correct port
+        'PORT': '3306',  # Specify the correct port
         'PASSWORD':'admin'
     }
 }
@@ -147,5 +148,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 REST_FRAMEWORK={
-    'COERCE_DECIMAL_TO_STRING':False
+    'COERCE_DECIMAL_TO_STRING':False,
+    'PAGE_SIZE':10
 }
+
+AUTH_USER_MODEL = 'core.User'
